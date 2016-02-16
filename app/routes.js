@@ -1,15 +1,17 @@
-var Meals = require('../config/db.js')
+var Food = require('./models/food.js')
 
 module.exports = function(app) {
-  app.get('/api/beef', function(req, res) {
-    Meals.find(function(err,beef) {
+
+  app.get('/', function(req, res) {
+    console.log("I am here");
+    Food.findOne({"name": "chicken"}, function(err,food) {
       if(err) {
         res.send(err);
       } else {
-        res.json(beef);
-      }
-
-    });
+        console.log(food.wines)
+        res.json(food.wines);
+        }
+      });
   });
 
   app.get('*', function(req, res) {
