@@ -1,12 +1,25 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-
-    <title>Starter MEAN Single Page Application</title>
-
+   <meta charset="UTF-8">
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+   <script type="text/javascript" src="/angular-route/angular-route.min.js"></script>
 </head>
-<body>
+<body ng-app = "app" ng-controller= "foodCtrl">
+  <div id='Enter'>
+    <h1>Enter Your Food</h1>
+      <form name= 'foodSearch' ng-submit= "getWines()" >
+      <input type='text' ng-model='search.wines' placeholder= "Enter your ingredients">
+      <button type= 'submit' value= 'Food'>
+      Find
+      </button>
+    <div class = "links" ng-repeat = "wine in wineResults">
+      <ul>
+        <li> {{wine}} </li>
+      </ul>
+    </div>
+
+  </div>
 
     we did it!
 

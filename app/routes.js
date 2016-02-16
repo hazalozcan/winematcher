@@ -2,9 +2,11 @@ var Food = require('./models/food.js')
 
 module.exports = function(app) {
 
-  app.get('/', function(req, res) {
+  app.post('/search', function(req, res) {
     console.log("I am here");
-    Food.findOne({"name": "chicken"}, function(err,food) {
+    console.log(req.body)
+    var foods= req.body.wines;
+    Food.findOne({"name": foods}, function(err,food) {
       if(err) {
         res.send(err);
       } else {
@@ -13,11 +15,13 @@ module.exports = function(app) {
         }
       });
   });
+};
 
-  app.get('*', function(req, res) {
-            res.sendfile('./public/views/index.html'); 
-        });
+        // res.sendfile('./public/views/index.html');
+  // app.get('*', function(req, res) {
+  //           res.sendfile('./public/views/index.html'); 
+  //       });
 
-    };
+  //   };
 
 
