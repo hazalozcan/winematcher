@@ -60,7 +60,12 @@ carrots.save(function(err){
 var port = process.env.PORT || 8080;
 
 //parse application/json
-app.use(bodyParser.json());
+app.use(function(req, res, next) {
+  console.log('I received a ' + req.method + ' request to ' + req.url);
+  next();
+});
+
+ app.use(bodyParser.json());
 
 app.use(methodOverride('X-HTTP-Method-Override'));
 
@@ -68,17 +73,17 @@ app.use(express.static(__dirname + '/public'));
 
 require('./app/routes')(app);
 
-app.use('/', function(req,res,next) {
-  console.log('Request url:', req.url)
-  Food.find({}, function(err, food) {
-    console.log(food)
-  });
-  next();
-});
+// app.use('/', function(req,res,next) {
+//   console.log('Request url:', req.url)
+//   Food.find({}, function(err, food) {
+//     console.log(food)
+//   });
+//   next();
+// });
 
 app.listen(port);
 
 
-console.log("You are connected to the port ");
+console.log("You are connected to the port ", port);
 
 exports = module.exports = app;
